@@ -61,11 +61,15 @@ Function developed to:
 
 
 #### Auxiliary Functions
-#### def status_value()
+~~~python
+def status_value( )
+~~~
+Function to read the current movement status of the SoBot. It processes the received command by evaluating the direction and movement based on status signals and returns the current value and movement flags.  
 
-Function to read the current movement status of the SoBot. It processes the received command by evaluating the direction and movement based on status signals and returns the current value and movement flags.
 
-#### def VideoCapture
+~~~python
+def VideoCapture( )
+~~~
 
 This function captures and displays continuous frames from the camera using OpenCV.  
 The function enters a loop where the frames are captured and displayed in a window called "Original".  
