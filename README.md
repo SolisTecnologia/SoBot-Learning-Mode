@@ -59,6 +59,19 @@ Function developed to:
 * Create synchronization mechanisms for different processes (Event);
 * Create data structures that will be shared in a safe and organized manner (Queue);
 
+
+#### Auxiliary Functions
+#### def status_value()
+
+Function to read the current movement status of the SoBot. It processes the received command by evaluating the direction and movement based on status signals and returns the current value and movement flags.
+
+#### def VideoCapture
+
+This function captures and displays continuous frames from the camera using OpenCV.  
+The function enters a loop where the frames are captured and displayed in a window called "Original".  
+The loop ends if the 'q' key is pressed, which closes the window.  
+This function is useful for viewing in real time what the robot's camera is capturing.  
+
 The commands used in this example to control SoBot are continuous movement commands, as follows:
 
 ~~~python
