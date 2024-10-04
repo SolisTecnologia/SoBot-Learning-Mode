@@ -49,6 +49,16 @@ import numpy as np
 
 ### Code Description
 
+The programming was developed using the **Multiprocessing** library to execute different tasks in parallel, thus being able to create modular functions, where each function executes a specific task (reading the control, communicating with the robot, capturing video, etc.) and **events** (Event()) are used to synchronize the execution of tasks between processes and **queues** (Queue()) are also used to store commands and allow communication between processes.
+
+#### Main Function
+
+Function developed to:
+* Find the serial device and initialize communication;
+* Create and initialize multiprocessing functions to execute tasks in parallel;
+* Create synchronization mechanisms for different processes (Event);
+* Create data structures that will be shared in a safe and organized manner (Queue);
+
 The commands used in this example to control SoBot are continuous movement commands, as follows:
 
 ~~~python
