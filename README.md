@@ -64,6 +64,7 @@ Function developed to:
 ~~~python
 def status_value( )
 ~~~
+
 Function to read the current movement status of the SoBot. It processes the received command by evaluating the direction and movement based on status signals and returns the current value and movement flags.  
 
 
