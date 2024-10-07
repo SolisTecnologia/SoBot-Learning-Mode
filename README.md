@@ -25,19 +25,19 @@ Several programming languages can be used to connect via API.
 For this programming, the SoBot was equipped with a camera and a Logitech F710 wireless controller. The robot is capable of recording and executing commands based on inputs received from the controller, allowing the movements to be replicated later. In addition, the SoBot's camera provides a real-time view of the path taken, which facilitates navigation and supervision of the robot in real time.
 
 Controller button functions:  
-    BTN_X – Get the time for the delay command  
-    BTN_Y – Enables learning mode  
-    BTN_A – Executes the recorded command queue  
-    BTN_B – Saves the executed command in the queue  
-    BTN_START – Enables wheel motors  
-    BTN_R1 – Control the lift up  
-    BTN_R2 – Control the lift down  
-    BTN_L1 – Controls digital output 6  
-    BTN_L2 – Controls digital output 7  
-    BTN_UP – Moves the robot forward  
-    BTN_DOWN – Moves the robot backwards  
-    BTN_LEFT – Moves the robot to the left  
-    BTN_RIGTH – Moves the robot to the right  
+>     BTN_X – Get the time for the delay command  
+>     BTN_Y – Enables learning mode  
+>     BTN_A – Executes the recorded command queue  
+>     BTN_B – Saves the executed command in the queue  
+>     BTN_START – Enables wheel motors  
+>     BTN_R1 – Control the lift up  
+>     BTN_R2 – Control the lift down  
+>     BTN_L1 – Controls digital output 6  
+>     BTN_L2 – Controls digital output 7  
+>     BTN_UP – Moves the robot forward  
+>     BTN_DOWN – Moves the robot backwards  
+>     BTN_LEFT – Moves the robot to the left  
+>     BTN_RIGTH – Moves the robot to the right  
   
 
 ### Programming Language
@@ -77,6 +77,7 @@ Function developed to:
 
 
 * #### AUXILIARY FUNCTIONS
+#### 1.
 ~~~python
 """
 Function for reading current status value
