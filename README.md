@@ -208,12 +208,11 @@ def serial_device_finder (name_device):
 This function finds the serial port that the SoBot device is connected to by comparing the device name with the descriptions of the ports available in the system.  
 
 
+
+
   
 For more information about the commands used, check the Robot Commands Reference Guide.
 
-
-
-### Flowchart
   
   
   
