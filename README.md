@@ -108,7 +108,7 @@ def Read_Gamepad(ev_Enable,ev_Learn_Mov,serialUSB,cmd_queue,ms_queue):
 
 This is the main reading function of the gamepad (Logitech F710). It reads the input events from the remote control and performs the corresponding actions to control the robot, sending commands through the serial interface.
 
-`**Controller Check:**`
+**`Controller Check:`**  
 Initially, the code lists all available input devices and checks if the controller is connected. If the controller is not found, it outputs a message.
 
 ~~~python
