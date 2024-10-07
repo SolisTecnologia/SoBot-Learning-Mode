@@ -24,6 +24,22 @@ Several programming languages can be used to connect via API.
 
 For this programming, the SoBot was equipped with a camera and a Logitech F710 wireless controller. The robot is capable of recording and executing commands based on inputs received from the controller, allowing the movements to be replicated later. In addition, the SoBot's camera provides a real-time view of the path taken, which facilitates navigation and supervision of the robot in real time.
 
+Controller button functions:  
+    BTN_X – Get the time for the delay command  
+    BTN_Y – Enables learning mode  
+    BTN_A – Executes the recorded command queue  
+    BTN_B – Saves the executed command in the queue  
+    BTN_START – Enables wheel motors  
+    BTN_R1 – Control the lift up  
+    BTN_R2 – Control the lift down  
+    BTN_L1 – Controls digital output 6  
+    BTN_L2 – Controls digital output 7  
+    BTN_UP – Moves the robot forward  
+    BTN_DOWN – Moves the robot backwards  
+    BTN_LEFT – Moves the robot to the left  
+    BTN_RIGTH – Moves the robot to the right  
+  
+
 ### Programming Language
 
 * Python  <img align="center" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
@@ -83,24 +99,45 @@ The function enters a loop where the frames are captured and displayed in a wind
 The loop ends if the 'q' key is pressed, which closes the window.  
 This function is useful for viewing in real time what the robot's camera is capturing.  
 
-The commands used in this example to control SoBot are continuous movement commands, as follows:
+~~~python
+"""
+Function to read the remote control
+"""
+def Read_Gamepad(ev_Enable,ev_Learn_Mov,serialUSB,cmd_queue,ms_queue):
+~~~
+
+This is the main reading function of the gamepad (Logitech F710). It reads the input events from the remote control and performs the corresponding actions to control the robot, sending commands through the serial interface.
+
+**Controller Check:**
+Initially, the code lists all available input devices and checks if the controller is connected. If the controller is not found, it outputs a message.
 
 ~~~python
-serialUSB.write(b"MT0 ME1")     # Enable continuous movement
-serialUSB.write(b"MT0 ME0")     # Disable continuous movement
-serialUSB.write(b"MT0 ML")      # Move left
-serialUSB.write(b"MT0 MR")      # Move right
-serialUSB.write(b"MT0 MB")      # Move backward
-serialUSB.write(b"MT0 MF")      # Move Forward
-serialUSB.write(b"MT0 MP")      # Pause movement
+Name_Control = 'Logitech Gamepad F710'
+device_path = ''
+
+# Lists all available input device
+devices = [evdev.InputDevice(path) for path in evdev.list_devices()]
+
+for device in devices:
+    # Checks if device name contains control name
+    if Name_Control in device.name:
+        print(f"Control Found: {device.name} in {device.path}")
+        device_path = device.path
+        break
+
+    # Caso não encontre o controle
+    else:
+        print(f"Control '{Name_Control}' not found.")
+
+gamepad = InputDevice(device_path)
 ~~~
 
 For more information about the commands used, check the Robot Commands Reference Guide.
 
 ### Flowchart
-
-![](https://github.com/SolisTecnologia/SoBot-USB-Control/blob/master/png/Flowchart_USB_Control.png)
-
+  
+  
+  
 # Reference Link
 [SolisTecnologia website](https://solistecnologia.com/produtos/robotsingle)
 
