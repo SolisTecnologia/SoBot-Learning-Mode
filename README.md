@@ -78,7 +78,7 @@ Function developed to:
 
 * #### AUXILIARY FUNCTIONS
 
-1. Status Value
+*1. Status Value*
 ~~~python
 """
 Function for reading current status value
@@ -88,7 +88,7 @@ def status_value (serial,ms_queue):
 
 Function to read the current movement status of the SoBot. It processes the received command by evaluating the direction and movement based on status signals and returns the current value and movement flags.  
 
-2. Video Capture
+*2. Video Capture*
 ~~~python
 """
 Function to capture video from the camera
@@ -101,7 +101,7 @@ The function enters a loop where the frames are captured and displayed in a wind
 The loop ends if the 'q' key is pressed, which closes the window.  
 This function is useful for viewing in real time what the robot's camera is capturing.  
 
-3. Read Gamepad
+*3. Read Gamepad*
 ~~~python
 """
 Function to read the remote control
@@ -177,7 +177,7 @@ if event.code == BTN_START and event.value == 1:
 If learning mode is active (activated by the **Y** button), movement commands sent to the SoBot are recorded in a queue (cmd_queue) when pressing **button B** and executed later when pressing **button A**. If they are not movement commands, simply executing them will be saved in the command queue sequence.  
 The code also handles timers to capture the time that certain buttons (such as X, R1 and R2) remain pressed, recording these times as command delay values.
 
-4. Send Sequence
+*4. Send Sequence*
 ~~~python
 """
 Function to send the commands stored in the queue to control the SoBot
@@ -187,7 +187,7 @@ def send_seq(ev_rec_OK,ev_Enable,ev_Learn_Mov,serialUSB,cmd_queue):
 
 The send_seq function is responsible for sending commands stored in the command queue to the SoBot in a continuous cycle until the queue is finished. It uses events to ensure that commands are sent and that responses are received correctly.  
 
-5. Read Seria lUSB
+*5. Read Seria USB*
 ~~~python
 """
 Function to read commands received via the USB serial port
@@ -197,7 +197,7 @@ def Read_SerialUSB(ev_rec_OK,serialUSB,ms_queue,ev_Learn_Mov):
 
 The Read_SerialUSB function is responsible for reading data received from the serial port sent by SoBot. It checks if there is data available for reading, and, if there is, it processes the response by checking whether it is confirmation of the return command, triggering the ev_rec_ok event or whether it is a command related to the motor (MT0) and, if it is in active learning mode (ev_Learn_Mov), it adds the command to the ms_queue queue.  
 
-6. Serial Device Finder
+*6. Serial Device Finder*
 ~~~python
 """
 Function to find the serial port that the SoBot board is connected to
