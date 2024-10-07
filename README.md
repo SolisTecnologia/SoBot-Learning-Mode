@@ -109,7 +109,7 @@ def Read_Gamepad(ev_Enable,ev_Learn_Mov,serialUSB,cmd_queue,ms_queue):
 This is the main reading function of the gamepad (Logitech F710). It reads the input events from the remote control and performs the corresponding actions to control the robot, sending commands through the serial interface.
 
 **`Controller Check:`**  
-Initially, the code lists all available input devices and checks if the controller is connected. If the controller is not found, it outputs a message.
+* Initially, the code lists all available input devices and checks if the controller is connected. If the controller is not found, it outputs a message.
 
 ~~~python
 Name_Control = 'Logitech Gamepad F710'
@@ -132,7 +132,80 @@ for device in devices:
 gamepad = InputDevice(device_path)
 ~~~
 
+**`Gamepad Events:`**  
+* The code uses evdev to continuously read controller events in a loop (gamepad.read_loop()). It filters out type 1 (button presses) and type 3 (analog movement) events.
+
+~~~python
+#evdev takes care of polling the controller in a loop
+for event in gamepad.read_loop():
+    print(event)
+
+    #filters by event type
+    if event.type == 1 or event.type == 3:
+~~~
+
+**`Actions Based on Buttons:`**  
+* When the Start button (BTN_START) is pressed, it switches the SoBot programming mode. If programming mode is active, the code activates the motors by sending the “MT0 ME1” and “CR1” commands to enable the return command of the executed actions and sets the “flag_start” to enable the identification of the other SoBot control buttons.
+
+~~~python
+# Check if the Start button is pressed
+if event.code == BTN_START and event.value == 1:
+    print(event)
+    if flag_start == 0:
+        print("PROGRAMMING ENABLED")
+        flag_start = 1
+        serialUSB.write(b"MT0 ME1")
+        sleep(0.2)
+        serialUSB.write(b"CR1")
+        serialUSB.write(b"LT E1 RD0 GR0 BL70")
+    else:
+        print("PROGRAMMING DISABLED")
+        flag_start = 0
+        serialUSB.write(b"CR0")
+        serialUSB.write(b"MT0 ME0")
+        serialUSB.write(b"LT E0 RD0 GR0 BL0")
+~~~
+
+* Actions related to the direction buttons (left, right, up, and down) send commands to the robot to move in the specified directions. For example, the Down button sends the command “MT0 MB” to move the robot backward. To teach the turn command, the first command must be the direction of the turn, and then the forward and backward buttons to tell whether it is a forward or backward turn.  
+
+* Other buttons, such as R1 and R2, send additional commands to control the elevator module.
+
+* The code also implements a "learning mode" logic, where button actions are recorded in a command queue (cmd_queue), and these commands can be re-executed later.  
+If learning mode is active (activated by the Y button), movement commands sent to the SoBot are recorded in a queue (cmd_queue) when pressing button B and executed later when pressing button A. If they are not movement commands, simply executing them will be saved in the command queue sequence.  
+The code also handles timers to capture the time that certain buttons (such as X, R1 and R2) remain pressed, recording these times as command delay values.
+
+~~~python
+"""
+Function to send the commands stored in the queue to control the SoBot
+"""
+def send_seq(ev_rec_OK,ev_Enable,ev_Learn_Mov,serialUSB,cmd_queue):
+~~~
+
+The send_seq function is responsible for sending commands stored in the command queue to the SoBot in a continuous cycle until the queue is finished. It uses events to ensure that commands are sent and that responses are received correctly.  
+
+~~~python
+"""
+Function to read commands received via the USB serial port
+"""
+def Read_SerialUSB(ev_rec_OK,serialUSB,ms_queue,ev_Learn_Mov):
+~~~
+
+The Read_SerialUSB function is responsible for reading data received from the serial port sent by SoBot. It checks if there is data available for reading, and, if there is, it processes the response by checking whether it is confirmation of the return command, triggering the ev_rec_ok event or whether it is a command related to the motor (MT0) and, if it is in active learning mode (ev_Learn_Mov), it adds the command to the ms_queue queue.  
+
+~~~python
+"""
+Function to find the serial port that the SoBot board is connected to
+"""
+def serial_device_finder (name_device):
+~~~
+
+This function finds the serial port that the SoBot device is connected to by comparing the device name with the descriptions of the ports available in the system.  
+
+
+  
 For more information about the commands used, check the Robot Commands Reference Guide.
+
+
 
 ### Flowchart
   

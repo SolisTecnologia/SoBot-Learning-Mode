@@ -16,7 +16,7 @@ Controller button functions:
     BTN_A – Executes the recorded command queue
     BTN_B – Saves the executed command in the queue
     BTN_START – Enables wheel motors
-    BTN_R1 – Configure curve mode on the same axis
+    BTN_R1 – Control the lift up
     BTN_R2 – Control the lift down
     BTN_L1 – Controls digital output 6
     BTN_L2 – Controls digital output 7
