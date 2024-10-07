@@ -67,7 +67,7 @@ import numpy as np
 
 The programming was developed using the **Multiprocessing** library to execute different tasks in parallel, thus being able to create modular functions, where each function executes a specific task (reading the control, communicating with the robot, capturing video, etc.) and **events** (Event()) are used to synchronize the execution of tasks between processes and **queues** (Queue()) are also used to store commands and allow communication between processes.
 
-* #### Main Function
+* #### MAIN FUNCTION
 
 Function developed to:
 >* Find the serial device and initialize communication;
@@ -76,7 +76,7 @@ Function developed to:
 >* Create data structures that will be shared in a safe and organized manner (Queue);
 
 
-#### Auxiliary Functions
+* #### AUXILIARY FUNCTIONS
 ~~~python
 """
 Function for reading current status value
@@ -171,7 +171,7 @@ if event.code == BTN_START and event.value == 1:
 * Other buttons, such as R1 and R2, send additional commands to control the elevator module.
 
 * The code also implements a "learning mode" logic, where button actions are recorded in a command queue (cmd_queue), and these commands can be re-executed later.  
-If learning mode is active (activated by the Y button), movement commands sent to the SoBot are recorded in a queue (cmd_queue) when pressing button B and executed later when pressing button A. If they are not movement commands, simply executing them will be saved in the command queue sequence.  
+If learning mode is active (activated by the **Y** button), movement commands sent to the SoBot are recorded in a queue (cmd_queue) when pressing **button B** and executed later when pressing **button A**. If they are not movement commands, simply executing them will be saved in the command queue sequence.  
 The code also handles timers to capture the time that certain buttons (such as X, R1 and R2) remain pressed, recording these times as command delay values.
 
 ~~~python
