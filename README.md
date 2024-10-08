@@ -38,11 +38,13 @@ Controller button functions:
 >     BTN_DOWN – Moves the robot backwards  
 >     BTN_LEFT – Moves the robot to the left  
 >     BTN_RIGTH – Moves the robot to the right  
-  
+___
 
 ### Programming Language
 
 * Python  <img align="center" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
+
+___
 
 ### Required Libraries
 
@@ -62,10 +64,12 @@ import numpy as np
 * **Serial:** For serial communication between the SoBot and the Raspberry.  
 * **Cv2 (OpenCV):** For capturing and processing video from the robot's integrated camera.  
 * **Numpy:** For manipulating arrays.  
+___
 
 ### Code Description
 
 The programming was developed using the **Multiprocessing** library to execute different tasks in parallel, thus being able to create modular functions, where each function executes a specific task (reading the control, communicating with the robot, capturing video, etc.) and **events** (Event()) are used to synchronize the execution of tasks between processes and **queues** (Queue()) are also used to store commands and allow communication between processes.
+___
 
 * #### MAIN FUNCTION
 
@@ -74,7 +78,7 @@ Function developed to:
 >* Create and initialize multiprocessing functions to execute tasks in parallel;
 >* Create synchronization mechanisms for different processes (Event);
 >* Create data structures that will be shared in a safe and organized manner (Queue);
-
+___
 
 * #### AUXILIARY FUNCTIONS
 
@@ -87,7 +91,7 @@ def status_value (serial,ms_queue):
 ~~~
 
 Function to read the current movement status of the SoBot. It processes the received command by evaluating the direction and movement based on status signals and returns the current value and movement flags.  
-
+___ 
 *2. Video Capture*
 ~~~python
 """
@@ -100,7 +104,7 @@ This function captures and displays continuous frames from the camera using Open
 The function enters a loop where the frames are captured and displayed in a window called "Original".  
 The loop ends if the 'q' key is pressed, which closes the window.  
 This function is useful for viewing in real time what the robot's camera is capturing.  
-
+___
 *3. Read Gamepad*
 ~~~python
 """
@@ -176,6 +180,7 @@ if event.code == BTN_START and event.value == 1:
 * The code also implements a "learning mode" logic, where button actions are recorded in a command queue (cmd_queue), and these commands can be re-executed later.  
 If learning mode is active (activated by the **Y** button), movement commands sent to the SoBot are recorded in a queue (cmd_queue) when pressing **button B** and executed later when pressing **button A**. If they are not movement commands, simply executing them will be saved in the command queue sequence.  
 The code also handles timers to capture the time that certain buttons (such as X, R1 and R2) remain pressed, recording these times as command delay values.
+___
 
 *4. Send Sequence*
 ~~~python
@@ -186,6 +191,7 @@ def send_seq(ev_rec_OK,ev_Enable,ev_Learn_Mov,serialUSB,cmd_queue):
 ~~~
 
 The send_seq function is responsible for sending commands stored in the command queue to the SoBot in a continuous cycle until the queue is finished. It uses events to ensure that commands are sent and that responses are received correctly.  
+___
 
 *5. Read Seria USB*
 ~~~python
@@ -196,6 +202,7 @@ def Read_SerialUSB(ev_rec_OK,serialUSB,ms_queue,ev_Learn_Mov):
 ~~~
 
 The Read_SerialUSB function is responsible for reading data received from the serial port sent by SoBot. It checks if there is data available for reading, and, if there is, it processes the response by checking whether it is confirmation of the return command, triggering the ev_rec_ok event or whether it is a command related to the motor (MT0) and, if it is in active learning mode (ev_Learn_Mov), it adds the command to the ms_queue queue.  
+___
 
 *6. Serial Device Finder*
 ~~~python
@@ -206,15 +213,9 @@ def serial_device_finder (name_device):
 ~~~
 
 This function finds the serial port that the SoBot device is connected to by comparing the device name with the descriptions of the ports available in the system.  
+___
 
-
-
-
-  
 For more information about the commands used, check the Robot Commands Reference Guide.
-
-  
-  
   
 # Reference Link
 [SolisTecnologia website](https://solistecnologia.com/produtos/robotsingle)
