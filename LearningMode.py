@@ -184,7 +184,7 @@ def Read_Gamepad(ev_Enable,ev_Learn_Mov,serialUSB,cmd_queue,ms_queue):
                 else:
                     print("PROGRAMMING DISABLED")
                     flag_start = 0
-                    serialUSB.write(b"CR0")
+                    # serialUSB.write(b"CR0")
                     serialUSB.write(b"MT0 ME0")
                     serialUSB.write(b"LT E0 RD0 GR0 BL0")
 
