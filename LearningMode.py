@@ -186,7 +186,7 @@ def Read_Gamepad(ev_Enable,ev_Learn_Mov,serialUSB,cmd_queue,ms_queue):
                     flag_start = 0
                     # serialUSB.write(b"CR0")
                     serialUSB.write(b"MT0 ME0")
-                    serialUSB.write(b"LT E0 RD0 GR0 BL0")
+                    serialUSB.write(b"LT E0")
 
             if flag_start == 1:
                 # Check if any button has been pressed
@@ -529,7 +529,7 @@ if __name__ == '__main__':
     else:
         print("No device was connected.")
 
-    serialUSB.write(b"CR0")
+    #serialUSB.write(b"CR0")
     serialUSB.write(b"MT0 MC MD1 RI80 AT100 DT100 V8")  # Parameter settings for continuous mode
     serialUSB.write(b"LT CR0")
 
