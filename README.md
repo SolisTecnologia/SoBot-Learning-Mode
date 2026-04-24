@@ -215,6 +215,19 @@ def serial_device_finder (name_device):
 This function finds the serial port that the SoBot device is connected to by comparing the device name with the descriptions of the ports available in the system.  
 ___
 
+### ⚠️ Important
+
+We recommend **avoiding general library updates** (`pip install --upgrade`).
+
+**Why?**  
+Some libraries (e.g. NumPy) introduce significant changes between versions that can break code that was previously working perfectly.
+
+### ✅ Recommended Best Practice:
+
+- Update **libraries individually**, one at a time:
+  ```bash
+  pip install numpy==2.2.6   # example of a stable version
+  
 For more information about the commands used, check the Robot Commands Reference Guide.
   
 # Reference Link
